@@ -27,7 +27,8 @@ public final class Go extends JavaPlugin  {
 	public boolean isSet(Player p, String n){
 		if(places.get(p.getName()).get(n) != null)
 			return true;
-		return false;
+		else 
+			return false;
 	}
 	
 	public void removePlace(Player p, String n){
