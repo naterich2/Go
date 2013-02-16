@@ -1,0 +1,7 @@
+name: Go
+main: Go.Go
+version: 1.1
+commands:
+   Go:
+      description: This command allows one to teleport, set a teleport, or delete a teleport
+      usage: /Go [name]  or  /Go set [name]  or /Go del [name]
