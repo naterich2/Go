@@ -1,5 +1,5 @@
 name: Go
-main: Go.Go
+main: naterich2.Go
 version: 1.1
 commands:
    Go:
