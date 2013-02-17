@@ -21,24 +21,32 @@ public class Go_Cmd_Executor implements CommandExecutor {
 					if(args[1]!= null){
 						if(plugin.isSet(sender, args[1]))
 							sender.sendMessage("This warp has already been set, try another name");
-						else
+						else{
 							plugin.addPlace(sender, args[1], sender.getLocation());
+							return true;
+						}
 					} else {
 						s.sendMessage("Usage: /Go set [name]\n/Go del [name]\n/Go [name]");
 					}
 				} else if(args[0].equalsIgnoreCase("del")){
 					if(args[1]!=null){
-						if(plugin.isSet(sender, args[1]))
-								plugin.removePlace(sender, args[1]);
+						if(plugin.isSet(sender, args[1])){
+							plugin.removePlace(sender, args[1]);
+							return true;
+						}	
 						else 
 							s.sendMessage("This personal warp has not been set, you cannot remove a warp that has not been set");
 					} else {
 						sender.sendMessage("Usage: /Go set [name]\n/Go del [name]\n/Go [name]");
 					}
+				} else if(args[0].equalsIgnoreCase("list")) {
+					sender.sendMessage("List of all your personal warps: "+plugin.List(sender));
 				} else {
 					if(args[0] != null){
-						if(plugin.isSet(sender, args[0]) == true)
+						if(plugin.isSet(sender, args[0]) == true){
 							sender.teleport(plugin.getLocation(sender, args[0]));
+							return true;
+						}
 						else
 							sender.sendMessage("That warp is not set, you cannot teleport to a warp that does not exist");
 					} else {

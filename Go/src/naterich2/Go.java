@@ -1,6 +1,9 @@
 package naterich2;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Set;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -25,6 +28,8 @@ public final class Go extends JavaPlugin  {
 	}
 	
 	public boolean isSet(Player p, String n){
+		if(places.get(p.getName())== null)
+			places.put(p.getName(), new HashMap<String, Location>());
 		if(places.get(p.getName()).get(n) != null)
 			return true;
 		else 
@@ -37,5 +42,17 @@ public final class Go extends JavaPlugin  {
 	
 	public Location getLocation(Player p, String n){
 		return places.get(p.getName()).get(n);
+	}
+	public String List(Player p){
+		String str = "";
+		Set<String> keys = places.get(p.getName()).keySet();
+		Object[] keyArr = keys.toArray();
+		ArrayList<String> keys2 = new ArrayList<String>();
+		for(int i = 0; i<keyArr.length; i++)
+			keys2.add(((String)keyArr[i]));
+		Collections.sort(keys2);
+		for(int i = 0; i<keys2.size(); i++)
+			str = str+(keys2.get(i)+" ");
+		return str;
 	}
 }
