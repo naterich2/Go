@@ -44,7 +44,7 @@ public final class Go extends JavaPlugin  {
 		return places.get(p.getName()).get(n);
 	}
 	public String List(Player p){
-		String str = "";
+		String str = p.getName()+"'s personal warps: ";
 		Set<String> keys = places.get(p.getName()).keySet();
 		Object[] keyArr = keys.toArray();
 		ArrayList<String> keys2 = new ArrayList<String>();
@@ -52,7 +52,10 @@ public final class Go extends JavaPlugin  {
 			keys2.add(((String)keyArr[i]));
 		Collections.sort(keys2);
 		for(int i = 0; i<keys2.size(); i++)
-			str = str+(keys2.get(i)+" ");
+			str = str+(keys2.get(i)+", ");
+		if(str.equals(p.getName()+"'s personal warps: ")){
+			str = p.getName()+" has not set any personal warps yet";
+		}
 		return str;
 	}
 }

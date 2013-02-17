@@ -14,7 +14,11 @@ public class Go_Cmd_Executor implements CommandExecutor {
 	}
 	
 	public boolean onCommand(CommandSender s, Command cmd, String label, String[] args){
-		if(s instanceof Player){
+		if(cmd.getName().equalsIgnoreCase("Go") && args[0].equalsIgnoreCase("List") && args[1] != null){
+			s.sendMessage(args[1]);
+			return true;
+		}
+		else if(s instanceof Player){
 			Player sender = (Player) s;
 			if(cmd.getName().equalsIgnoreCase("Go")){
 				if(args[0].equalsIgnoreCase("set")){
@@ -26,7 +30,7 @@ public class Go_Cmd_Executor implements CommandExecutor {
 							return true;
 						}
 					} else {
-						s.sendMessage("Usage: /Go set [name]\n/Go del [name]\n/Go [name]");
+						return false;
 					}
 				} else if(args[0].equalsIgnoreCase("del")){
 					if(args[1]!=null){
@@ -37,10 +41,10 @@ public class Go_Cmd_Executor implements CommandExecutor {
 						else 
 							s.sendMessage("This personal warp has not been set, you cannot remove a warp that has not been set");
 					} else {
-						sender.sendMessage("Usage: /Go set [name]\n/Go del [name]\n/Go [name]");
+						return false;
 					}
 				} else if(args[0].equalsIgnoreCase("list")) {
-					sender.sendMessage("List of all your personal warps: "+plugin.List(sender));
+					sender.sendMessage(plugin.List(sender));
 				} else {
 					if(args[0] != null){
 						if(plugin.isSet(sender, args[0]) == true){
@@ -50,7 +54,7 @@ public class Go_Cmd_Executor implements CommandExecutor {
 						else
 							sender.sendMessage("That warp is not set, you cannot teleport to a warp that does not exist");
 					} else {
-						sender.sendMessage("Usage: /Go set [name]\n/Go del [name]\n/Go [name]");
+						return false;
 					}
 				}
 			}
